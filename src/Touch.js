@@ -454,13 +454,12 @@ export class TouchBackend {
         let elementsAtPoint = this.getDropTargetElementsAtPoint
           ? this.getDropTargetElementsAtPoint(clientOffset.x, clientOffset.y, dragOverTargetNodes)
           : elementsFromPoint(clientOffset.x, clientOffset.y);
-        // Extend list with SVG parents that are not receiving elementsFromPoint events (svg groups)
+      // Extend list with parents that are not receiving elementsFromPoint events (size 0 elements and svg groups)
         let elementsAtPointExtended = [];
         for (let nodeId in elementsAtPoint){
             let currentNode = elementsAtPoint[nodeId];
             elementsAtPointExtended.push(currentNode);
-            // Is currentNode an SVG element
-            while(currentNode && currentNode.ownerSVGElement){
+            while(currentNode){
                 currentNode = currentNode.parentElement;
                 if( !elementsAtPointExtended.includes(currentNode) ) elementsAtPointExtended.push(currentNode)
             }
