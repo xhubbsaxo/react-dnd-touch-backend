@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import SortableList from './SortableList.jsx';
 import Immutable from 'immutable';
 import { default as Touch } from '../../src/Touch';
-import DragDropContext from 'react-dnd/lib/DragDropContext';
+import { DragDropContext } from 'react-dnd/lib/DragDropContext';
 import { default as ItemPreview } from './ItemPreview.jsx';
 
 let initialData1 = [];
