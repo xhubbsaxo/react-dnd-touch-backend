@@ -13,15 +13,15 @@ Touch Backend for [react-dnd](https://github.com/gaearon/react-dnd)
 Follow [react-dnd docs](http://gaearon.github.io/react-dnd/) to setup your app. Then swap out `HTML5Backend` for `TouchBackend` as such:
 
 ```js
-import { default as TouchBackend } from 'react-dnd-touch-backend';
+import React, { Component } from 'react';
+import TouchBackend from 'react-dnd-touch-backend';
 import { DragDropContext } from 'react-dnd';
 
-var YourApp = React.createClass(
+class YourApp extends Component {
   /* ... */
+}
 
-);
-
-module.exports = DragDropContext(TouchBackend)(YourApp);
+export default DragDropContext(TouchBackend)(YourApp);
 ```
 
 ### Options
