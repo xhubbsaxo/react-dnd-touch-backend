@@ -509,7 +509,7 @@ export class TouchBackend {
     }
 
     handleCancelOnEscape (e) {
-        if (e.key === 'Escape'){
+        if (e.key === 'Escape' && this.monitor.isDragging()){
             this._mouseClientOffset = {};
 
             this.uninstallSourceNodeRemovalObserver();
