@@ -60,8 +60,7 @@ function eventShouldEndDrag(e) {
 }
 
 // Polyfill for document.elementsFromPoint
-const elementsFromPoint = ((typeof document !== 'undefined' && document.elementsFromPoint) || function (x,y) {
-
+const elementsFromPoint = ((typeof document !== 'undefined' && document.elementsFromPoint) || function (x, y) {
     if (document.msElementsFromPoint) {
         // msElementsFromPoint is much faster but returns a node-list, so convert it to an array
         const msElements = document.msElementsFromPoint(x, y);
@@ -71,27 +70,25 @@ const elementsFromPoint = ((typeof document !== 'undefined' && document.elements
     var elements = [], previousPointerEvents = [], current, i, d;
 
     // get all elements via elementFromPoint, and remove them from hit-testing in order
-    while ((current = document.elementFromPoint(x,y)) && elements.indexOf(current) === -1 && current !== null) {
+    while ((current = document.elementFromPoint(x, y)) && elements.indexOf(current) === -1 && current !== null) {
+        // push the element and its current style
+        elements.push(current);
+        previousPointerEvents.push({
+            value: current.style.getPropertyValue('pointer-events'),
+            priority: current.style.getPropertyPriority('pointer-events')
+        });
 
-      // push the element and its current style
-    	elements.push(current);
-    	previousPointerEvents.push({
-          value: current.style.getPropertyValue('pointer-events'),
-          priority: current.style.getPropertyPriority('pointer-events')
-      });
-
-      // add "pointer-events: none", to get to the underlying element
-    	current.style.setProperty('pointer-events', 'none', 'important');
+        // add "pointer-events: none", to get to the underlying element
+        current.style.setProperty('pointer-events', 'none', 'important');
     }
 
     // restore the previous pointer-events values
-    for(i = previousPointerEvents.length; d=previousPointerEvents[--i]; ) {
-    	elements[i].style.setProperty('pointer-events', d.value ? d.value: '', d.priority);
+    for (i = previousPointerEvents.length; d=previousPointerEvents[--i]; ) {
+        elements[i].style.setProperty('pointer-events', d.value ? d.value: '', d.priority);
     }
 
     // return our results
     return elements;
-
 }).bind(typeof document !== 'undefined' ? document : null);
 
 const supportsPassive = (() => {
@@ -452,32 +449,35 @@ export class TouchBackend {
         const dragOverTargetNodes = dragOverTargetIds.map(key => this.targetNodes[key]);
         // Get the a ordered list of nodes that are touched by
         let elementsAtPoint = this.getDropTargetElementsAtPoint
-          ? this.getDropTargetElementsAtPoint(clientOffset.x, clientOffset.y, dragOverTargetNodes)
-          : elementsFromPoint(clientOffset.x, clientOffset.y);
-      // Extend list with parents that are not receiving elementsFromPoint events (size 0 elements and svg groups)
+            ? this.getDropTargetElementsAtPoint(clientOffset.x, clientOffset.y, dragOverTargetNodes)
+            : elementsFromPoint(clientOffset.x, clientOffset.y);
+        // Extend list with parents that are not receiving elementsFromPoint events (size 0 elements and svg groups)
         let elementsAtPointExtended = [];
-        for (let nodeId in elementsAtPoint){
+        for (let nodeId in elementsAtPoint) {
+            if (!elementsAtPoint.hasOwnProperty(nodeId)) {
+                continue
+            }
             let currentNode = elementsAtPoint[nodeId];
             elementsAtPointExtended.push(currentNode);
-            while(currentNode){
+            while (currentNode){
                 currentNode = currentNode.parentElement;
-                if( !elementsAtPointExtended.includes(currentNode) ) elementsAtPointExtended.push(currentNode)
+                if ( !elementsAtPointExtended.includes(currentNode) ) {elementsAtPointExtended.push(currentNode)}
             }
         }
         let orderedDragOverTargetIds = elementsAtPointExtended
-          // Filter off nodes that arent a hovered DropTargets nodes
-          .filter(node => dragOverTargetNodes.indexOf(node) > -1)
-          // Map back the nodes elements to targetIds
-          .map(node => {
-            for (let targetId in this.targetNodes) {
-              if (node === this.targetNodes[targetId])
-                return targetId;
-            }
-            return null;
-          })
-          // Filter off possible null rows
-          .filter(node => !!node)
-          .filter((id, index, ids) => ids.indexOf(id) === index);
+        // Filter off nodes that arent a hovered DropTargets nodes
+            .filter(node => dragOverTargetNodes.indexOf(node) > -1)
+        // Map back the nodes elements to targetIds
+            .map(node => {
+                for (let targetId in this.targetNodes) {
+                    if (node === this.targetNodes[targetId])
+                    {return targetId;}
+                }
+                return null;
+            })
+        // Filter off possible null rows
+            .filter(node => !!node)
+            .filter((id, index, ids) => ids.indexOf(id) === index);
 
         // Reverse order because dnd-core reverse it before calling the DropTarget drop methods
         orderedDragOverTargetIds.reverse();

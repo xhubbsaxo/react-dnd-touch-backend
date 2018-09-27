@@ -4,10 +4,13 @@
   "description": "Touch backend for react-dnd",
   "main": "dist/Touch.js",
   "scripts": {
+    "clean": "rimraf dist/**/* examples/*.browserified.js",
+    "js-dev": "browserify ./examples/js/index.jsx -o ./examples/main.browserified.js",
+    "js-dev-drop": "browserify ./examples/dropTarget/js/index.jsx -o ./examples/dropTarget/main.browserified.js",
+    "compile": "babel src/Touch.js --out-file dist/Touch.js",
     "lint": "eslint --quiet --cache . --ext .js --ext .jsx",
-    "prepublishOnly": "gulp dist",
-    "test": "gulp clean lint",
-    "dev": "gulp dev"
+    "prepublishOnly": "npm run clean && npm run compile",
+    "test": "npm run clean && npm run lint"
   },
   "repository": {
     "type": "git",
@@ -27,31 +30,36 @@
   },
   "homepage": "https://github.com/yahoo/react-dnd-touch-backend#readme",
   "dependencies": {
-    "invariant": "^2.2.4",
+    "invariant": "^2.2.4"
+  },
+  "peerDependencies": {
     "react-dnd": "^5.0.0"
   },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-eslint": "^8.2.5",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babelify": "^8.0.0",
-    "browserify": "^16.0.0",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "7",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@semantic-release/release-notes-generator": "^7.0.2",
+    "babel-eslint": "10",
+    "babelify": "10",
+    "browserify": "^16.2.3",
     "classnames": "^2.2.6",
-    "del": "^3.0.0",
-    "eslint": "^5.0.0",
-    "eslint-plugin-react": "^7.10.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
-    "gulp-changelog": "^1.0.0",
-    "gulp-connect": "^5.5.0",
-    "gulp-util": "^3.0.8",
+    "eslint": "^5.6.0",
+    "eslint-plugin-react": "^7.11.1",
     "immutable": "^3.8.2",
     "prop-types": "^15.6.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "vinyl-source-stream": "^2.0.0",
-    "watchify": "^3.11.0"
+    "react": "^16.5.2",
+    "react-dnd": "^5.0.0",
+    "react-dom": "^16.5.2",
+    "rimraf": "^2.6.2"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify"
+      ]
+    ]
   }
 }

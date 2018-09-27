@@ -26,7 +26,7 @@ function bundle (args) {
         debug: true,
         standalone: name
     })
-    .transform(babelify);
+        .transform(babelify);
 }
 
 export default function dev ({ src, destFilename, destFolder }) {

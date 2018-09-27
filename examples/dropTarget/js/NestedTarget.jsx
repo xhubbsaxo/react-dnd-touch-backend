@@ -8,10 +8,10 @@ const dragNestedTarget = {
     drop(props, monitor, component) {
         let droppedItem = monitor.getDropResult();
 
-        if (!droppedItem) droppedItem = monitor.getItem();
+        if (!droppedItem) {droppedItem = monitor.getItem();}
 
         droppedItem = {
-          value: props.changeFunction(droppedItem.value)
+            value: props.changeFunction(droppedItem.value)
         };
 
         console.log(props.message, droppedItem);
@@ -19,11 +19,11 @@ const dragNestedTarget = {
         return droppedItem;
     },
     hover(props, monitor, component) {
-      component.setState({ hasBeenHovered: true });
-      clearTimeout(component.timeout);
-      component.timeout = setTimeout(() => {
-        component.setState({ hasBeenHovered: false });
-      }, 1000);
+        component.setState({ hasBeenHovered: true });
+        clearTimeout(component.timeout);
+        component.timeout = setTimeout(() => {
+            component.setState({ hasBeenHovered: false });
+        }, 1000);
     }
 };
 
@@ -36,13 +36,13 @@ function collect(connect, monitor) {
 
 class NestedTarget extends Component {
     constructor (props, context) {
-      super(props, context);
-      this.state = {
-        hasBeenHovered: false
-      }
+        super(props, context);
+        this.state = {
+            hasBeenHovered: false
+        }
     }
     componentWillUnmount () {
-      clearTimeout(this.timeout);
+        clearTimeout(this.timeout);
     }
     render () {
         const {
@@ -50,7 +50,7 @@ class NestedTarget extends Component {
         } = this.props;
 
         return connectDropTarget(
-            <div className={`target nested`}>
+            <div className={'target nested'}>
                 {this.props.message}
                 {this.state.hasBeenHovered ? this.props.children : null}
             </div>
