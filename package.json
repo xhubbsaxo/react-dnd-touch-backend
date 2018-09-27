@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "0.5.2",
+  "version": "0.0.0-development",
   "description": "Touch backend for react-dnd",
   "main": "dist/Touch.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "compile": "babel src/Touch.js --out-file dist/Touch.js",
     "lint": "eslint --quiet --cache . --ext .js --ext .jsx",
     "prepublishOnly": "npm run clean && npm run compile",
-    "test": "npm run clean && npm run lint"
+    "test": "npm run clean && npm run lint",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
@@ -53,7 +54,8 @@
     "react": "^16.5.2",
     "react-dnd": "^5.0.0",
     "react-dom": "^16.5.2",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "semantic-release": "^15.9.16"
   },
   "browserify": {
     "transform": [
