@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "0.5.2",
+  "version": "0.6.0",
   "description": "Touch backend for react-dnd",
   "main": "dist/Touch.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "invariant": "^2.2.4"
   },
   "peerDependencies": {
-    "react-dnd": "^5.0.0"
+    "react-dnd": "^6.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.0",
@@ -52,7 +52,7 @@
     "immutable": "^3.8.2",
     "prop-types": "^15.6.2",
     "react": "^16.5.2",
-    "react-dnd": "^5.0.0",
+    "react-dnd": "^6.0.0",
     "react-dom": "^16.5.2",
     "rimraf": "^2.6.2",
     "semantic-release": "^15.9.16"
