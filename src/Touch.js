@@ -428,6 +428,11 @@ export class TouchBackend {
             distance(this._mouseClientOffset.x, this._mouseClientOffset.y, clientOffset.x, clientOffset.y) >
                 (this.touchSlop ? this.touchSlop : 0)) {
             this.moveStartSourceIds = null;
+
+            this.actions.initCoords(moveStartSourceIds || [], {
+                getSourceClientOffset: this.getSourceClientOffset,
+                clientOffset: this._mouseClientOffset
+            });
             this.actions.beginDrag(moveStartSourceIds, {
                 clientOffset: this._mouseClientOffset,
                 getSourceClientOffset: this.getSourceClientOffset,
