@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Touch backend for react-dnd",
   "main": "dist/Touch.js",
   "scripts": {
@@ -37,25 +37,25 @@
     "react-dnd": "^6.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "7",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.1.0",
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
-    "@semantic-release/release-notes-generator": "^7.0.2",
-    "babel-eslint": "10",
+    "@semantic-release/release-notes-generator": "^7.1.4",
+    "babel-eslint": "^10.0.1",
     "babelify": "10",
     "browserify": "^16.2.3",
     "classnames": "^2.2.6",
-    "eslint": "^5.6.0",
+    "eslint": "^5.9.0",
     "eslint-plugin-react": "^7.11.1",
     "immutable": "^3.8.2",
     "prop-types": "^15.6.2",
-    "react": "^16.5.2",
-    "react-dnd": "^6.0.0",
-    "react-dom": "^16.5.2",
+    "react": "^16.6.3",
+    "react-dnd": "7",
+    "react-dom": "^16.6.3",
     "rimraf": "^2.6.2",
-    "semantic-release": "^15.9.16"
+    "semantic-release": "^15.12.4"
   },
   "browserify": {
     "transform": [
