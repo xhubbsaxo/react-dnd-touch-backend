@@ -10,8 +10,7 @@
     "compile": "babel src/Touch.js --out-file dist/Touch.js",
     "lint": "eslint --quiet --cache . --ext .js --ext .jsx",
     "prepublishOnly": "npm run clean && npm run compile",
-    "test": "npm run clean && npm run lint",
-    "semantic-release": "semantic-release"
+    "test": "npm run clean && npm run lint"
   },
   "repository": {
     "type": "git",
@@ -42,7 +41,6 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
-    "@semantic-release/release-notes-generator": "^7.1.4",
     "babel-eslint": "^10.0.1",
     "babelify": "10",
     "browserify": "^16.2.3",
@@ -54,8 +52,7 @@
     "react": "^16.6.3",
     "react-dnd": "7",
     "react-dom": "^16.6.3",
-    "rimraf": "^2.6.2",
-    "semantic-release": "^15.12.4"
+    "rimraf": "^2.6.2"
   },
   "browserify": {
     "transform": [
