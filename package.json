@@ -1,6 +1,6 @@
 {
   "name": "react-dnd-touch-backend",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Touch backend for react-dnd",
   "main": "dist/Touch.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "invariant": "^2.2.4"
   },
   "peerDependencies": {
-    "react-dnd": "^6.0.0"
+    "react-dnd": "^7.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
