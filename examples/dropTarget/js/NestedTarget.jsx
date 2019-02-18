@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DropTarget from 'react-dnd/lib/DropTarget';
+import { DropTarget } from 'react-dnd';
 
 const dragNestedTarget = {
     drop(props, monitor, component) {
@@ -58,7 +58,7 @@ class NestedTarget extends Component {
     }
 }
 
-NestedTarget.PropTypes = {
+NestedTarget.propTypes = {
     message: PropTypes.string.isRequired,
     changeFunction: PropTypes.func.isRequired,
     connectDropTarget: PropTypes.func.isRequired,

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DragSource from 'react-dnd/lib/DragSource';
+import { DragSource } from 'react-dnd';
 import DragPreview from './DragPreview.jsx';
 
 const dragSource = {
@@ -35,7 +35,7 @@ class Source extends Component {
     }
 }
 
-Source.PropTypes = {
+Source.propTypes = {
     value: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     connectDragSource: PropTypes.func.isRequired,

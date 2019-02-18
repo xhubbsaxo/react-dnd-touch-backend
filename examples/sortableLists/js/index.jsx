@@ -8,8 +8,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SortableList from './SortableList.jsx';
 import Immutable from 'immutable';
-import { default as Touch } from '../../src/Touch';
-import { DragDropContext } from 'react-dnd/lib/DragDropContext';
+import Touch from '../../../src/Touch';
+import { DragDropContext } from 'react-dnd';
 import { default as ItemPreview } from './ItemPreview.jsx';
 
 let initialData1 = [];
@@ -17,11 +17,11 @@ let initialData2 = [];
 let i = 0;
 for (; i < 10; i++) {
     initialData1.push({
-        id: i,
+        id: `${i}`,
         name: `Item-${i}`
     });
     initialData2.push({
-        id: i + 10,
+        id: `${i + 10}`,
         name: `Item-${i + 10}`
     });
 }
@@ -45,7 +45,7 @@ function reorder (fromObj, toObj) {
         const dropList = source.get(dropListId);
         let dropIndex = dropList.findIndex(item => item.get('id') === dropId);
 
-        if ( 
+        if (
             dragListId === dropListId &&
             dragIndex <= dropIndex
         ) {
@@ -63,17 +63,17 @@ function App ({lists}) {
     return (
         <div>
             {lists.toArray().map((list, i) =>
-                <SortableList key={i} id={i} data={list} onReorder={reorder}/>
+                <SortableList key={String(i)} id={i} data={list} onReorder={reorder}/>
             )}
             <ItemPreview key="__preview" name="Item" />
         </div>
     );
 }
 
-var DragDropApp = DragDropContext(Touch({ enableMouseEvents: true }))(App);
+const DragDropContextApp = DragDropContext(Touch({ enableMouseEvents: true }))(App);
 
 function render (lists = datasource) {
-    ReactDOM.render(<DragDropApp lists={lists} />, document.getElementById('main'));
+    ReactDOM.render(<DragDropContextApp lists={lists} />, document.getElementById('main'));
 }
 
 render();

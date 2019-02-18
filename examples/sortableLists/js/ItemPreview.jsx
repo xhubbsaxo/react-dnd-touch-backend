@@ -6,10 +6,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import DragLayer from 'react-dnd/lib/DragLayer';
+import { DragLayer } from 'react-dnd';
 
 function collect (monitor) {
-    var item = monitor.getItem();
+    const item = monitor.getItem();
     return {
         id: item && item.id,
         name: item && item.name,
@@ -26,9 +26,9 @@ function getItemStyles (currentOffset) {
     }
 
     // http://www.paulirish.com/2012/why-moving-elements-with-translate-is-better-than-posabs-topleft/
-    var x = currentOffset.x;
-    var y = currentOffset.y;
-    var transform = `translate(${x}px, ${y}px)`;
+    const x = currentOffset.x;
+    const y = currentOffset.y;
+    const transform = `translate(${x}px, ${y}px)`;
 
     return {
         pointerEvents: 'none',

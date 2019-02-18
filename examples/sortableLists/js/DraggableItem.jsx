@@ -6,10 +6,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import DragSource from 'react-dnd/lib/DragSource';
-import DropTarget from 'react-dnd/lib/DropTarget';
-
-import classnames from 'classnames';
+import { DragSource, DropTarget } from 'react-dnd';
+import classNames from 'classnames';
 
 /**
  * The docs for the following functions can be found in
@@ -50,7 +48,7 @@ const dropTarget = {
 
 class Item extends React.Component {
     render () {
-        const className = classnames('item', {
+        const className = classNames('item', {
             'is-over': this.props.isOver
         });
 
@@ -71,7 +69,7 @@ class Item extends React.Component {
     }
 }
 
-Item.PropTypes = {
+Item.propTypes = {
     id: PropTypes.number.isRequired,
     listId: PropTypes.number.isRequired,
     text: PropTypes.string,

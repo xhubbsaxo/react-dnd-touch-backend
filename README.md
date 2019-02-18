@@ -9,6 +9,21 @@
 
 Touch Backend for [react-dnd](https://github.com/gaearon/react-dnd)
 
+## Instalation
+
+npm:
+
+```bash
+ npm install react-dnd-touch-backend --save
+```
+
+yarn:
+
+```bash
+ yarn add react-dnd-touch-backend
+```
+
+
 ## Usage
 Follow [react-dnd docs](http://gaearon.github.io/react-dnd/) to setup your app. Then swap out `HTML5Backend` for `TouchBackend` as such:
 
@@ -42,6 +57,7 @@ Options include:
 - touchSlop
 - ignoreContextMenu
 - scrollAngleRanges
+- enableHoverOutsideTarget
 
 ## Tips
 ### Drag Preview
@@ -86,6 +102,14 @@ DragDropContext(TouchBackend({ scrollAngleRanges: [{ start: 30, end: 150 }, { st
 DragDropContext(TouchBackend({ scrollAngleRanges: [{ start: 300 }, { end: 60 }, { start: 120, end: 240 }] }));
 ```
 
+**enableHoverOutsideTarget**
+
+* Continue dragging of currently dragged element when pointer leaves DropTarget area
+* Default: undefined
+```js
+DragDropContext(TouchBackend({ enableHoverOutsideTarget: true }));
+```
+
 **getDropTargetElementsAtPoint**
 * Specify a custom function to find drop target elements at the given point.  Useful for improving performance in environments (iOS Safari) where document.elementsFromPoint is not available.
 * Default: undefined (use document.elementsFromPoint or inline elementsFromPoint "polyfill")
@@ -108,8 +132,18 @@ DragDropContext(TouchBackend({
 
 ## Examples
 The `examples` folder has a sample integration. In order to build it, run:
+
+npm:
+
 ```bash
 npm i && npm run dev
 ```
+
+yarn:
+
+```bash
+yarn install && yarn run dev
+```
+
 Then navigate to `localhost:7789` or `(IP Address):7789` in your mobile browser to access the example.
 Code licensed under the MIT license. See LICENSE file for terms.

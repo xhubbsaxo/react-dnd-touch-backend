@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { default as Touch } from '../../../src/Touch';
-import DragDropContext from 'react-dnd/lib/DragDropContext';
+import { DragDropContext } from 'react-dnd';
 import Source from './Source.jsx';
 import Target from './Target.jsx';
 import NestedTarget from './NestedTarget.jsx';
@@ -25,5 +25,5 @@ function App () {
     );
 }
 
-App = DragDropContext(Touch({ enableMouseEvents: true }))(App);
-ReactDOM.render(<App />, document.getElementById('app'));
+const DragDropApp = DragDropContext(Touch({ enableMouseEvents: true }))(App);
+ReactDOM.render(<DragDropApp />, document.getElementById('app'));

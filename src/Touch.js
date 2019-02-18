@@ -141,6 +141,7 @@ export class TouchBackend {
             enableMouseEvents: false,
             enableKeyboardEvents: false,
             ignoreContextMenu: false,
+            enableHoverOutsideTarget: false,
             delayTouchStart: 0,
             delayMouseStart: 0,
             touchSlop: 0,
@@ -159,6 +160,7 @@ export class TouchBackend {
         this.ignoreContextMenu = options.ignoreContextMenu;
         this.touchSlop = options.touchSlop;
         this.scrollAngleRanges = options.scrollAngleRanges;
+        this.enableHoverOutsideTarget = options.enableHoverOutsideTarget;
         this.sourceNodes = {};
         this.sourceNodeOptions = {};
         this.sourcePreviewNodes = {};
@@ -405,7 +407,7 @@ export class TouchBackend {
             return;
         }
 
-        const { moveStartSourceIds, dragOverTargetIds } = this;
+        const { moveStartSourceIds, dragOverTargetIds, enableHoverOutsideTarget } = this;
         const clientOffset = getEventClientOffset(e);
 
         if (!clientOffset) {
@@ -424,7 +426,7 @@ export class TouchBackend {
         if (
             !this.monitor.isDragging() &&
             this._mouseClientOffset.hasOwnProperty('x') &&
-            moveStartSourceIds && 
+            moveStartSourceIds &&
             distance(this._mouseClientOffset.x, this._mouseClientOffset.y, clientOffset.x, clientOffset.y) >
                 (this.touchSlop ? this.touchSlop : 0)) {
             this.moveStartSourceIds = null;
@@ -480,6 +482,18 @@ export class TouchBackend {
             .filter(node => !!node)
             .filter((id, index, ids) => ids.indexOf(id) === index);
 
+        // Invoke hover for drop targets when source node is still over and pointer is outside
+        if (enableHoverOutsideTarget){
+            for (let targetId in this.targetNodes) {
+                if (this.targetNodes[targetId] &&
+                        this.targetNodes[targetId].contains(sourceNode)
+                        && orderedDragOverTargetIds.indexOf(targetId) === -1) {
+                    orderedDragOverTargetIds.unshift(targetId);
+                    break;
+                }
+            }
+        }
+
         // Reverse order because dnd-core reverse it before calling the DropTarget drop methods
         orderedDragOverTargetIds.reverse();
 
@@ -516,10 +530,6 @@ export class TouchBackend {
             this.uninstallSourceNodeRemovalObserver();
             this.actions.endDrag();
         }
-    }
-
-    handleOnContextMenu () {
-        this.moveStartSourceIds = null;
     }
 
     installSourceNodeRemovalObserver (node) {

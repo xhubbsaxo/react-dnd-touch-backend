@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import DropTarget from 'react-dnd/lib/DropTarget';
+import { DropTarget } from 'react-dnd';
 
 const dragTarget = {
     drop(props, monitor, component) {
@@ -33,7 +33,7 @@ class Target extends Component {
     }
 }
 
-Target.PropTypes = {
+Target.propTypes = {
     connectDropTarget: PropTypes.func.isRequired,
     isOver: PropTypes.bool.isRequired
 };
