@@ -464,7 +464,7 @@ export class TouchBackend {
             elementsAtPointExtended.push(currentNode);
             while (currentNode){
                 currentNode = currentNode.parentElement;
-                if ( !elementsAtPointExtended.includes(currentNode) ) {elementsAtPointExtended.push(currentNode)}
+                if ( elementsAtPointExtended.indexOf(currentNode) === -1 ) {elementsAtPointExtended.push(currentNode)}
             }
         }
         let orderedDragOverTargetIds = elementsAtPointExtended
